@@ -24,11 +24,6 @@ impl<'ctx> TryIntoPlugin<'ctx> for NavTree {
 
 #[native]
 fn native_obj_new(_ctx: &IPluginContext, path: &CStr) -> NavTree {
-    println!("path: {}", path.to_str().unwrap());
-    println!(
-        "pwd: {}",
-        std::env::current_dir().unwrap().to_str().unwrap()
-    );
     let data = read(path.to_str().unwrap()).unwrap();
     NavTree(get_quad_tree(data).unwrap())
 }
